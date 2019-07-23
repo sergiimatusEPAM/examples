@@ -39,13 +39,13 @@ module "dcos" {
   dcos_superuser_password_hash = "$6$rounds=656000$YSvuFmasQDXheddh$TpYlCxNHF6PbsGkjlK99Pwxg7D0mgWJ.y0hE2JKoa61wHx.1wtxTAHVRHfsJU9zzHWDoE08wpdtToHimNR9FJ/"
   dcos_superuser_username      = "demo-super"
 
-  additional_windows_private_agent_ips       = ["${concat(module.winagent.private_ips)}"]
-  additional_windows_private_agent_passwords = ["${concat(module.winagent.windows_passwords)}"]
+  additional_windows_private_agent_ips       = ["${concat(module.windows-instance.private_ips)}"]
+  additional_windows_private_agent_passwords = ["${concat(module.windows-instance.windows_passwords)}"]
 }
 
-module "winagent" {
+module "windows-instance" {
   source  = "dcos-terraform/windows-instance/aws"
-  version = "~> 0.2.1"
+  version = "~>= 0.0.1"
 
   providers = {
     aws = "aws"
