@@ -46,7 +46,7 @@ module "dcos" {
   dcos_superuser_username      = "demo-super"
 
   additional_windows_private_agent_ips       = ["${concat(module.winagent.private_ips)}"]
-  additional_windows_private_agent_passwords = ["${concat(module.winagent.windows_passwords)}"]
+  #additional_windows_private_agent_passwords = ["${concat(module.winagent.windows_passwords)}"]
 }
 
 module "winagent" {
@@ -54,7 +54,7 @@ module "winagent" {
   version = "0.0.1"
 
   providers = {
-    azurerm = "azurerm"
+    azure = "azure"
   }
 
   location = "${local.location}"
