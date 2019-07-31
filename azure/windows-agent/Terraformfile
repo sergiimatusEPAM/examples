@@ -15,7 +15,7 @@
     "source": "git::https://github.com/dcos-terraform/terraform-azurerm-public-agents.git?ref=support/0.2.x"
   },
   "dcos-terraform/dcos/azurerm": {
-    "source": "git::https://github.com/dcos-terraform/terraform-azurerm-dcos.git?ref=support/0.2.x"
+    "source": "git::https://github.com/sergiimatusEPAM/terraform-azurerm-dcos.git?ref=feature/windows-support"
   },
   "dcos-terraform/dcos-core/template": {
     "source": "git::https://github.com/dcos-terraform/terraform-template-dcos-core.git?ref=support/0.2.x"
