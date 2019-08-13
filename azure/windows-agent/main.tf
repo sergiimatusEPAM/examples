@@ -78,11 +78,10 @@ module "winagent" {
   num = "1"
 }
 
-output "public_ips" {
-  description = "Windows IP"
-  value = "${module.winagent.public_ips}"
+output "winagent-ips" {
+ description = "Windows IP"
+ value = "${module.winagent.public_ips}"
 }
-
 
 output "windows_passwords" {
   description = "Windows Password for user ${module.winagent.admin_username}"
