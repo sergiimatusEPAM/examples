@@ -1,4 +1,4 @@
-provider "azure" {}
+provider "azurerm" {}
 
 # Used to determine your public IP for forwarding rules
 data "http" "whatismyip" {
@@ -21,7 +21,7 @@ module "dcos" {
   version = "~> 0.2.0"
 
   providers = {
-    azure = "azure"
+    azurerm = "azurerm"
   }
 
   location = "${local.location}"
@@ -34,15 +34,16 @@ module "dcos" {
   num_private_agents = "1"
   num_public_agents  = "1"
 
-  bootstrap_vm_size       = "Standard_B2ms"
-  masters_vm_size         = "${local.vm_size}"
-  private_agents_vm_size  = "${local.vm_size}"
-  public_agents_vm_size   = "${local.vm_size}"
+  bootstrap_vm_size      = "Standard_B2ms"
+  masters_vm_size        = "${local.vm_size}"
+  private_agents_vm_size = "${local.vm_size}"
+  public_agents_vm_size  = "${local.vm_size}"
 
-  dcos_instance_os        = "${local.dcos_instance_os}"
+  dcos_instance_os = "${local.dcos_instance_os}"
 
-  dcos_variant              = "${local.dcos_variant}"
-  dcos_version              = "1.13.0"
+  dcos_variant = "${local.dcos_variant}"
+  dcos_version = "1.13.0"
+
   # dcos_license_key_contents = "${file("~/license.txt")}"
   #ansible_bundled_container = "mesosphere/dcos-ansible-bundle:feature-windows-support-039d79d"
   ansible_bundled_container = "sergiimatusepam/dcos-ansible-bundle:feature-windows-support"
@@ -57,35 +58,35 @@ module "dcos" {
 }
 
 module "winagent" {
-  source  = "./modules/terraform-azurerm-windows-instance"
+  source = "dcos-terraform/windows-instance/azurerm"
   providers = {
-    azure = "azure"
+    azurerm = "azurerm"
   }
 
-  location = "${local.location}"
+  location         = "${local.location}"
   dcos_instance_os = "${local.dcos_winagent_os}"
-  cluster_name           = "${local.cluster_name}"
+  cluster_name     = "${local.cluster_name}"
 
-  # Windows hostname limited by 15 characters:
-  hostname_format        = "winagt-%[1]d-%[2]s"
+  # be aware - Azure limits the Windows hostname with 15 chars:
+  hostname_format = "winagt-%[1]d-%[2]s"
 
-  subnet_id              = "${module.dcos.infrastructure.subnet_id}"
-  resource_group_name    = "${module.dcos.infrastructure.resource_group_name}"
-  vm_size                = "${local.vm_size}"
-  admin_username         = "dcosadmin"
-  public_ssh_key         = "${local.ssh_public_key_file}"
+  subnet_id           = "${module.dcos.infrastructure.subnet_id}"
+  resource_group_name = "${module.dcos.infrastructure.resource_group_name}"
+  vm_size             = "${local.vm_size}"
+  admin_username      = "dcosadmin"
+  public_ssh_key      = "${local.ssh_public_key_file}"
 
   num = "3"
 }
 
 output "winagent-ips" {
- description = "Windows IP"
- value = "${module.winagent.public_ips}"
+  description = "Windows IP"
+  value       = "${module.winagent.public_ips}"
 }
 
 output "windows_passwords" {
   description = "Windows Password for user ${module.winagent.admin_username}"
-  value = ["${concat(module.winagent.windows_passwords)}"]
+  value       = ["${concat(module.winagent.windows_passwords)}"]
 }
 
 output "masters_dns_name" {
