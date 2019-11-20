@@ -8,7 +8,7 @@ data "http" "whatismyip" {
 }
 
 locals {
-  cluster_name = "5546-sm"
+  cluster_name = "sm-ee"
 }
 
 module "dcos" {
@@ -33,13 +33,13 @@ module "dcos" {
   dcos_instance_os        = "centos_7.6"
   bootstrap_instance_type = "m5.xlarge"
 
-  # dcos_variant              = "ee"
-  # dcos_license_key_contents = "${file("~/license.txt")}"
+  dcos_variant              = "ee"
+  dcos_license_key_contents = "${file("~/license.txt")}"
   dcos_variant = "open"
 
-  dcos_version              = "1.13.3"
+  dcos_version              = "2.0.0"
   ansible_bundled_container = "mesosphere/dcos-ansible-bundle:feature-windows-support-d513b6d"
-
+  ansible_additional_config = "dcos.download_win : https://downloads.mesosphere.com/dcos-enterprise/testing/master/windows/dcos_generate_config_win.ee.sh"
   # provide a SHA512 hashed password, here "deleteme"
   dcos_superuser_password_hash = "$6$rounds=656000$YSvuFmasQDXheddh$TpYlCxNHF6PbsGkjlK99Pwxg7D0mgWJ.y0hE2JKoa61wHx.1wtxTAHVRHfsJU9zzHWDoE08wpdtToHimNR9FJ/"
   dcos_superuser_username      = "demo-super"
