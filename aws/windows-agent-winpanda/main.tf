@@ -35,7 +35,7 @@ module "dcos" {
 
   dcos_variant              = "ee"
   dcos_license_key_contents = "${file("~/license.txt")}"
-  dcos_variant = "open"
+  #dcos_variant = "open"
 
   dcos_version              = "2.0.0"
   ansible_bundled_container = "mesosphere/dcos-ansible-bundle:feature-windows-support-d513b6d"
