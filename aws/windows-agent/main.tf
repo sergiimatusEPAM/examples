@@ -42,20 +42,19 @@ module "dcos" {
   dcos_version              = "2.0.0"
   ansible_bundled_container = "sergiimatusepam/dcos-ansible-bundle:pr-81"
 
-  #sm custom for winagent testing
-  custom_dcos_download_path = "https://downloads.mesosphere.com/dcos-enterprise/testing/pull/6596/dcos_generate_config.ee.sh"
+  #Linux Installer path - place url with "pull/PR#" or "master" suffix here:
+  custom_dcos_download_path = "https://downloads.mesosphere.com/dcos-enterprise/testing/master/dcos_generate_config.ee.sh"
 
   dcos_config = <<-EOF
 enable_windows_agents: true
 -EOF
 
+  #Windows Installer path - place url with "pull/PR#" or "master" suffix here:
   ansible_additional_config = <<-EOF
 dcos:
-   download_win: https://downloads.mesosphere.com/dcos-enterprise/testing/pull/6596/windows/dcos_generate_config_win.ee.sh
+   download_win: https://downloads.mesosphere.com/dcos-enterprise/testing/master/windows/dcos_generate_config_win.ee.sh
 -EOF
 
-  # Win Installer master -> https://downloads.mesosphere.com/dcos-enterprise/testing/master/windows/dcos_generate_config_win.ee.sh
-  # Lin Installer master -> https://downloads.mesosphere.com/dcos-enterprise/testing/master/dcos_generate_config.ee.sh
   # provide a SHA512 hashed password, here "deleteme"
   dcos_superuser_password_hash = "$6$rounds=656000$YSvuFmasQDXheddh$TpYlCxNHF6PbsGkjlK99Pwxg7D0mgWJ.y0hE2JKoa61wHx.1wtxTAHVRHfsJU9zzHWDoE08wpdtToHimNR9FJ/"
 
