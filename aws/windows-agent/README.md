@@ -1,7 +1,7 @@
-# ALPHA STATE - DO NOT USE THIS EXAMPLE
+# Windows BETA STATE
 
-This is an early example how to use and integrate windows agents. If you're not
-an active developer of this project we do not suggest to use it.
+This is an early example how to use and integrate Windows agents as part of Beta release. If you're not
+an active Beta tester we don't suggest to use it. 
 
 ## Terraform usage
 
