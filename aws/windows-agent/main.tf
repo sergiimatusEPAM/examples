@@ -39,7 +39,7 @@ module "dcos" {
   dcos_license_key_contents = "${file("~/license.txt")}"
 
   #dcos_variant = "open"
-  dcos_version              = "2.0.0"
+  dcos_version              = "2.1.0"
   ansible_bundled_container = "sergiimatusepam/dcos-ansible-bundle:pr-81"
 
   #Linux Installer path - place url with "pull/PR#" or "master" suffix here:
