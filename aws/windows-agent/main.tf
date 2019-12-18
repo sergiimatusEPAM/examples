@@ -40,7 +40,7 @@ module "dcos" {
 
   #dcos_variant = "open"
   dcos_version              = "2.1.0"
-  ansible_bundled_container = "sergiimatusepam/dcos-ansible-bundle:pr-81"
+  ansible_bundled_container = "mesosphere/dcos-ansible-bundle:windows-beta-support"
 
   #Linux Installer path - place url with "pull/PR#" or "master" suffix here:
   custom_dcos_download_path = "https://downloads.mesosphere.com/dcos-enterprise/testing/master/dcos_generate_config.ee.sh"
