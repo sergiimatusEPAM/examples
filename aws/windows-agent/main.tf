@@ -8,7 +8,7 @@ data "http" "whatismyip" {
 }
 
 locals {
-  cluster_name = "demo-ee-2dec"
+  cluster_name = "demo-ee"
 }
 
 module "dcos" {
